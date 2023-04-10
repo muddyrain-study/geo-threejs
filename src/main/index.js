@@ -53,6 +53,8 @@ function operationData(jsonData) {
         const mesh = createMesh(coordinate);
         mesh.properties = feature.properties.name;
         province.add(mesh);
+        const line = createLine(coordinate);
+        province.add(line);
       });
     }
     if (feature.geometry.type === "MultiPolygon") {
@@ -61,6 +63,8 @@ function operationData(jsonData) {
           const mesh = createMesh(coor);
           mesh.properties = feature.properties.name;
           province.add(mesh);
+          const line = createLine(coor);
+          province.add(line);
         });
       });
     }
@@ -90,6 +94,30 @@ function createMesh(polygon) {
   const mesh = new THREE.Mesh(geometry, material);
   return mesh;
 }
+
+function createLine(polygon) {
+  const lineGeometry = new THREE.BufferGeometry();
+  const pointsArray = new Array();
+  polygon.forEach((row) => {
+    const [x, y] = projection(row);
+    // 创建三维点
+    pointsArray.push(new THREE.Vector3(x, -y, 10));
+  });
+  // 放入多个点
+  lineGeometry.setFromPoints(pointsArray);
+  // 生成随机颜色
+  const lineColor = new THREE.Color(
+    Math.random() * 0.5 + 0.5,
+    Math.random() * 0.5 + 0.5,
+    Math.random() * 0.5 + 0.5
+  );
+
+  const lineMaterial = new THREE.LineBasicMaterial({
+    color: lineColor,
+  });
+  return new THREE.Line(lineGeometry, lineMaterial);
+}
+
 let lastPicker = null;
 window.addEventListener("click", (event) => {
   const mouse = new THREE.Vector2();
