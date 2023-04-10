@@ -1,0 +1,28 @@
+{
+  "name": "geo-threejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "source": "src/index.html",
+  "scripts": {
+    "dev": "parcel",
+    "build": "parcel build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/muddyrain-study/geo-threejs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/muddyrain-study/geo-threejs/issues"
+  },
+  "homepage": "https://github.com/muddyrain-study/geo-threejs#readme",
+  "dependencies": {
+    "@parcel/transformer-glsl": "^2.8.3",
+    "d3": "^7.8.4",
+    "parcel": "^2.8.3",
+    "three": "^0.151.3"
+  }
+}
